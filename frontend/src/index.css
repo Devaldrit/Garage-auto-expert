@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Garage Auto Expert - Design System */
+    --background: 0 0% 100%;
+    --foreground: 215 20% 20%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 215 20% 20%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 215 20% 20%;
+
+    /* Primary - Bleu confiance */
+    --primary: 208 88% 48%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 208 88% 65%;
+    --primary-dark: 208 88% 35%;
+
+    /* Secondary - Gris métallisé */
+    --secondary: 210 10% 45%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-light: 210 10% 96%;
+
+    /* Accent - Orange Eurorepar */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+    --accent-light: 25 95% 65%;
+
+    --muted: 210 15% 96%;
+    --muted-foreground: 215 10% 50%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 214 20% 90%;
+    --input: 214 20% 90%;
+    --ring: 208 88% 48%;
+
+    --radius: 0.75rem;
+
+    /* Custom tokens */
+    --shadow-soft: 0 2px 8px rgba(0, 0, 0, 0.08);
+    --shadow-medium: 0 4px 16px rgba(0, 0, 0, 0.12);
+    --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 215 25% 12%;
+    --foreground: 0 0% 95%;
+
+    --card: 215 22% 16%;
+    --card-foreground: 0 0% 95%;
+
+    --popover: 215 22% 16%;
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 208 88% 55%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 10% 35%;
+    --secondary-foreground: 0 0% 100%;
+
+    --accent: 25 95% 58%;
+    --accent-foreground: 0 0% 100%;
+
+    --muted: 215 15% 20%;
+    --muted-foreground: 215 10% 65%;
+
+    --destructive: 0 84% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 215 15% 25%;
+    --input: 215 15% 25%;
+    --ring: 208 88% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-4xl md:text-5xl;
+  }
+
+  h2 {
+    @apply text-3xl md:text-4xl;
+  }
+
+  h3 {
+    @apply text-2xl md:text-3xl;
+  }
+}
+
+@layer utilities {
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-medium {
+    box-shadow: var(--shadow-medium);
+  }
+
+  .transition-base {
+    transition: var(--transition-base);
+  }
+}
