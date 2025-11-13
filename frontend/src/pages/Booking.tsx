@@ -24,7 +24,7 @@ const Booking = () => {
   const updateQuantity = useCartStore((state) => state.updateQuantity);
 
   const handleValidate = () => {
-    navigate("/payment");
+    navigate("/confirm");
   };
 
   const handleIncrement = (id: number) => {

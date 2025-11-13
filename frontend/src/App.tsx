@@ -8,7 +8,7 @@ import Services from "./pages/Services";
 import Vehicle from "./pages/Vehicle";
 import Booking from "./pages/Booking";
 import Reviews from "./pages/Reviews";
-import Payment from "./pages/Payment";
+import Confirm from "./pages/confirm";
 import NotFound from "./pages/NotFound";
 import OrderConfirmation from "./pages/successful";
 
@@ -26,7 +26,7 @@ const App = () => (
           <Route path="/vehicle" element={<Vehicle />} />
           <Route path="/booking" element={<Booking />} />
           <Route path="/reviews" element={<Reviews />} />
-          <Route path="/payment" element={<Payment />} />
+          <Route path="/confirm" element={<Confirm />} />
           <Route path="/success" element={<OrderConfirmation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

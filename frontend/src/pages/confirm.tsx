@@ -10,7 +10,7 @@ import { Lock, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
 
-const Payment = () => {
+const Confirm = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { vehicle, date, timeSlot } = location.state || {};
@@ -18,7 +18,7 @@ const Payment = () => {
   const items = useCartStore((state) => state.items);
   const total = useCartStore.getState().total;
 
-  const handlePayment = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleConfirm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const form = e.target as HTMLFormElement;
@@ -96,7 +96,7 @@ const Payment = () => {
             <div className="md:col-span-3">
               <Card>
                 <CardContent>
-                  <form onSubmit={handlePayment} className="space-y-6">
+                  <form onSubmit={handleConfirm} className="space-y-6">
                     <div className="space-y-4">
                       <h3 className="font-semibold">Coordonnées</h3>
 
@@ -222,4 +222,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default Confirm;
