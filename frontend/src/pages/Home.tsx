@@ -11,7 +11,6 @@ import {
   Wrench,
   Droplets,
   Wind,
-  Gauge,
   Disc,
   Star,
 } from "lucide-react";
@@ -116,9 +115,7 @@ const Home = () => {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-
       <main>
-        {/* Promo Banner */}
         <section className="py-12 px-4 bg-white from-accent to-accent-light text-accent-foreground">
           <div className="container text-center">
             <h2 className="text-3xl font-bold mb-4 text-black">
@@ -140,7 +137,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Hero Section remplacée par le formulaire de saisie manuelle */}
         <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-4">
           <div className="container max-w-4xl text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
@@ -151,13 +147,11 @@ const Home = () => {
               trouver les services adaptés.
             </p>
           </div>
-
           <div className="container max-w-3xl">
             <ManualSearchForm onSubmit={handleSubmitManual} />
           </div>
         </section>
 
-        {/* Services Section */}
         <section className="py-16 px-4 bg-muted/30">
           <div className="container">
             <div className="text-center mb-12">
@@ -170,7 +164,7 @@ const Home = () => {
               </p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              {services.map((service, index) => (
+              {services.map((service) => (
                 <ServiceCard key={service.id} {...service} />
               ))}
             </div>
@@ -182,7 +176,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Reviews Section */}
         <section className="py-16 px-4">
           <div className="container">
             <div className="text-center mb-12">
@@ -201,7 +194,6 @@ const Home = () => {
                 Basé sur 127 avis vérifiés
               </p>
             </div>
-
             <Carousel className="max-w-5xl mx-auto">
               <CarouselContent>
                 {reviews.map((review, index) => (
@@ -216,7 +208,6 @@ const Home = () => {
               <CarouselPrevious />
               <CarouselNext />
             </Carousel>
-
             <div className="text-center mt-8">
               <Button variant="outline" size="lg" asChild>
                 <Link to="/reviews">Voir tous les avis</Link>
@@ -225,7 +216,6 @@ const Home = () => {
           </div>
         </section>
 
-        {/* Trust Section */}
         <section className="py-16 px-4 bg-gradient-to-br from-primary/5 to-accent/5">
           <div className="container">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
@@ -265,7 +255,7 @@ const Home = () => {
             </div>
           </div>
         </section>
-        {/* Contact Section */}
+
         <section className="py-20 px-4 bg-muted/40">
           <div className="container max-w-4xl">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4">
@@ -275,12 +265,31 @@ const Home = () => {
               Une question, un devis, ou une demande particulière ? Remplissez
               le formulaire ci-dessous, notre équipe vous répondra rapidement.
             </p>
-
             <form
-              onSubmit={(e) => {
+              onSubmit={async (e) => {
                 e.preventDefault();
-                toast.success("Votre message a bien été envoyé !");
-                (e.target as HTMLFormElement).reset();
+                const form = e.target as HTMLFormElement;
+                const formData = new FormData(form);
+                const name = formData.get("name");
+                const email = formData.get("email");
+                const subject = formData.get("subject");
+                const message = formData.get("message");
+
+                try {
+                  const res = await fetch(`${import.meta.env.VITE_API_URL}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, subject, message }),
+                  });
+
+                  const data = await res.json();
+                  if (!res.ok)
+                    throw new Error(data.error || "Erreur lors de l'envoi");
+                  toast.success("Votre message a bien été envoyé !");
+                  form.reset();
+                } catch (err: any) {
+                  toast.error(err.message || "Impossible d'envoyer le message");
+                }
               }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 rounded-2xl shadow-md"
             >
@@ -291,6 +300,7 @@ const Home = () => {
                 <input
                   type="text"
                   id="name"
+                  name="name"
                   placeholder="Jean Dupont"
                   required
                   className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary/50"
@@ -304,6 +314,7 @@ const Home = () => {
                 <input
                   type="email"
                   id="email"
+                  name="email"
                   placeholder="votre@email.fr"
                   required
                   className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary/50"
@@ -317,6 +328,7 @@ const Home = () => {
                 <input
                   type="text"
                   id="subject"
+                  name="subject"
                   placeholder="Objet de votre message"
                   required
                   className="border rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-primary/50"
@@ -329,6 +341,7 @@ const Home = () => {
                 </label>
                 <textarea
                   id="message"
+                  name="message"
                   placeholder="Votre message..."
                   rows={5}
                   required
@@ -349,7 +362,6 @@ const Home = () => {
           </div>
         </section>
       </main>
-
       <Footer />
     </div>
   );

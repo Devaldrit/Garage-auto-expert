@@ -18,16 +18,61 @@ const Payment = () => {
   const items = useCartStore((state) => state.items);
   const total = useCartStore.getState().total;
 
-  const handlePayment = (e: React.FormEvent) => {
+  const handlePayment = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    toast.success("Votre demande de devis a bien été enregistrée.", {
-      duration: 2500,
-    });
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
 
-    setTimeout(() => {
-      navigate("/success"); 
-    }, 2500);
+    const name = formData.get("name") as string;
+    const firstname = formData.get("firstname") as string;
+    const email = formData.get("email") as string;
+    const phone = formData.get("phone") as string;
+
+    if (!name || !firstname || !email || !phone) {
+      toast.error("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    const message = `
+      Demande de devis :
+      Nom : ${name}
+      Prénom : ${firstname}
+      Email : ${email}
+      Téléphone : ${phone}
+      Véhicule : ${vehicle || "Non spécifié"}
+      Services : ${items.map((i) => `${i.title} × ${i.quantity}`).join(", ")}
+      Total : ${total().toFixed(2)}€
+    `;
+
+    try {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: `${name} ${firstname}`,
+          email,
+          subject: "Demande de devis",
+          message,
+        }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json();
+        throw new Error(data.error || "Erreur lors de l'envoi du formulaire");
+      }
+
+      toast.success("Votre demande de devis a bien été enregistrée.", {
+        duration: 2500,
+      });
+      form.reset();
+
+      setTimeout(() => {
+        navigate("/success");
+      }, 2500);
+    } catch (err: any) {
+      toast.error(err.message || "Impossible d'envoyer la demande");
+    }
   };
 
   return (
@@ -59,6 +104,7 @@ const Payment = () => {
                         <Label htmlFor="name">Nom</Label>
                         <Input
                           id="name"
+                          name="name"
                           placeholder="John"
                           className="mt-2"
                           required
@@ -69,6 +115,7 @@ const Payment = () => {
                         <Label htmlFor="firstname">Prénom</Label>
                         <Input
                           id="firstname"
+                          name="firstname"
                           placeholder="Doe"
                           className="mt-2"
                           required
@@ -79,6 +126,7 @@ const Payment = () => {
                         <Label htmlFor="email">Email</Label>
                         <Input
                           id="email"
+                          name="email"
                           type="email"
                           placeholder="votreemail@exemple.fr"
                           className="mt-2"
@@ -90,6 +138,7 @@ const Payment = () => {
                         <Label htmlFor="phone">Téléphone</Label>
                         <Input
                           id="phone"
+                          name="phone"
                           type="tel"
                           placeholder="06 12 34 56 78"
                           className="mt-2"
