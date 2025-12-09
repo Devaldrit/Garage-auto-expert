@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Phone, Calendar } from "lucide-react";
+import { MapPin, Phone, ShoppingCart } from "lucide-react";
+import logo from "../assets/images/logo/logoLightText.png";
 
 const Header = () => {
   const location = useLocation();
@@ -8,62 +8,80 @@ const Header = () => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between">
-        <Link to="/" className="flex items-center space-x-2">
-          <div className="flex flex-col">
-            <span className="text-xl font-bold text-primary">Auto Expert</span>
-            <span className="text-xs text-muted-foreground">
-              Illzach - Eurorepar
-            </span>
+    <header className="w-full bg-white shadow-sm z-50">
+      {/* TOP BAR */}
+      <div className="w-full border-b">
+        <div className="max-w-7xl mx-auto flex items-center justify-between py-4 px-4">
+          {/* LOGO */}
+          <div className="flex items-center space-x-3">
+            <img src={logo} alt="Auto Expert Logo" className="w-40 md:w-48" />
           </div>
-        </Link>
 
-        <nav
-          className="hidden md:flex items-center space-x-6"
-          aria-label="Navigation principale"
-        >
-          <Link
-            to="/"
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              isActive("/") ? "text-primary" : "text-foreground"
-            }`}
-          >
-            Accueil
-          </Link>
-          <Link
-            to="/services"
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              isActive("/services") ? "text-primary" : "text-foreground"
-            }`}
-          >
-            Nos Services
-          </Link>
-          <Link
-            to="/reviews"
-            className={`text-sm font-medium transition-colors hover:text-primary ${
-              isActive("/reviews") ? "text-primary" : "text-foreground"
-            }`}
-          >
-            Avis Clients
-          </Link>
-        </nav>
+          {/* Contact info + Panier */}
+          <div className="flex items-center gap-6">
+            {/* Contact info */}
+            <div className="hidden md:flex flex-col text-gray-800 text-right">
+              <div className="flex items-center text-sm">
+                <MapPin className="h-4 w-4 mr-2 text-gray-600" />
+                <span>37 Avenue de Belgique, 68110 Illzach</span>
+              </div>
+              <div className="flex items-center text-sm mt-1">
+                <Phone className="h-4 w-4 mr-2 text-gray-600" />
+                <span>+33 9 86 25 61 89</span>
+              </div>
+            </div>
 
-        <div className="flex items-center space-x-2">
-          <Button variant="ghost" size="sm" className="hidden sm:flex" asChild>
-            <a href="tel:+33389000000" aria-label="Appeler le garage">
-              <Phone className="h-4 w-4 mr-2" />
-              03 89 00 00 00
-            </a>
-          </Button>
-          <Button size="sm" asChild>
-            <Link to="/vehicle" aria-label="Prendre rendez-vous">
-              <Calendar className="h-4 w-4 mr-2" />
+            {/* PANIER BUTTON */}
+            <Link
+              to="/vehicle"
+              className="
+                flex items-center gap-2 
+                bg-[#d98c2b] hover:bg-[#c07823]
+                text-white px-4 py-2 rounded-md 
+                transition font-medium shadow-md
+              "
+            >
+              <ShoppingCart className="h-5 w-5" />
               Panier
             </Link>
-          </Button>
+          </div>
         </div>
       </div>
+
+      {/* ORANGE LINE */}
+      <div className="w-full h-[3px] bg-[#d98c2b]" />
+
+      {/* NAVIGATION */}
+      <nav className="w-full bg-white">
+        <div className="max-w-7xl mx-auto flex items-center justify-center space-x-10 py-3 text-gray-900 font-medium">
+          <Link
+            to="/"
+            className={`hover:text-[#d98c2b] transition ${
+              isActive("/") ? "text-[#d98c2b]" : ""
+            }`}
+          >
+            ACCUEIL
+          </Link>
+
+          <Link
+            to="/services"
+            className={`hover:text-[#d98c2b] transition ${
+              isActive("/services") ? "text-[#d98c2b]" : ""
+            }`}
+          >
+            SERVICES
+          </Link>
+
+          <Link
+            to="/reviews"
+            className={`hover:text-[#d98c2b] transition ${
+              isActive("/reviews") ? "text-[#d98c2b]" : ""
+            }`}
+          >
+            AVIS CLIENTS
+          </Link>
+        </div>
+      </nav>
     </header>
   );
 };

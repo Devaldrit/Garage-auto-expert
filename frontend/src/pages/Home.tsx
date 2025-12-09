@@ -23,6 +23,14 @@ import {
 } from "@/components/ui/carousel";
 import { toast } from "sonner";
 import ManualSearchForm from "../components/ManualSearchForm.tsx";
+import HeroSection from "@/components/HeroSection.tsx";
+import bgImage from "../assets/images/logo/heroBackground.jpg";
+import logoNoText from "../assets/images/logo/LogoNoText.jpg";
+import OffersCarousel from "@/components/OffersCarousel.tsx";
+
+import offre1 from "../assets/images/promotions/promotion-kit-de-distribution-garage-toulouse.png";
+import offre2 from "../assets/images/promotions/promotion-entretien-vehicule-garage-ad-toulouse.png";
+import offre3 from "../assets/images/promotions/offre-pomo-1.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -116,25 +124,14 @@ const Home = () => {
     <div className="min-h-screen flex flex-col">
       <Header />
       <main>
+        <section>
+          <HeroSection backgroundUrl={bgImage} logoUrl={logoNoText} />
+        </section>
         <section className="py-12 px-4 bg-white from-accent to-accent-light text-accent-foreground">
-          <div className="container text-center">
-            <h2 className="text-3xl font-bold mb-4 text-black">
-              Offre du moment
-            </h2>
-            <p className="text-lg mb-6 text-black">
-              🎉 Profitez de -15% sur votre première révision ! 🎉
-            </p>
-            <Button
-              size="lg"
-              variant="secondary"
-              className="bg-amber-600"
-              asChild
-            >
-              <Link className="text-black" to="/vehicle">
-                J'en profite
-              </Link>
-            </Button>
-          </div>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-black">
+            Nos offres du moments
+          </h2>
+          <OffersCarousel images={[offre1, offre2, offre3]} />
         </section>
 
         <section className="bg-gradient-to-b from-gray-50 to-white py-20 px-4">
