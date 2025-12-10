@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { CheckCircle2, Plus, Minus } from "lucide-react";
+import { CheckCircle2, Trash2 } from "lucide-react";
 import { useCartStore } from "@/store/useCartStore";
 
 const Booking = () => {
@@ -18,24 +18,11 @@ const Booking = () => {
   const location = useLocation();
 
   const vehicle = location.state?.vehicle || "Véhicule non identifié";
-
   const items = useCartStore((state) => state.items);
   const total = useCartStore.getState().total;
-  const updateQuantity = useCartStore((state) => state.updateQuantity);
+  const removeItem = useCartStore((state) => state.removeItem);
 
-  const handleValidate = () => {
-    navigate("/confirm");
-  };
-
-  const handleIncrement = (id: number) => {
-    const item = items.find((i) => i.id === id);
-    if (item) updateQuantity(id, item.quantity + 1);
-  };
-
-  const handleDecrement = (id: number) => {
-    const item = items.find((i) => i.id === id);
-    if (item && item.quantity > 1) updateQuantity(id, item.quantity - 1);
-  };
+  const handleValidate = () => navigate("/confirm");
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -48,105 +35,87 @@ const Booking = () => {
               Récapitulatif de votre devis
             </h1>
             <p className="text-lg text-muted-foreground">
-              Validez votre demande de devis
+              Vérifiez votre sélection avant de continuer
             </p>
           </div>
 
-          <div className="grid md:grid-cols-1 gap-2">
-            <Card className="sticky top-20">
-              <CardHeader>
-                <CardTitle>Récapitulatif</CardTitle>
-                <CardDescription>
-                  Vérifiez les informations de votre réservation
-                </CardDescription>
-              </CardHeader>
+          <Card className="sticky top-20">
+            <CardHeader>
+              <CardTitle>Récapitulatif</CardTitle>
+              <CardDescription>Voici les services sélectionnés</CardDescription>
+            </CardHeader>
 
-              <CardContent className="space-y-6">
-                {/* Véhicule */}
-                <div>
-                  <h3 className="font-semibold mb-2">Véhicule</h3>
-                  <p className="text-muted-foreground">{vehicle}</p>
-                </div>
+            <CardContent className="space-y-6">
+              <div>
+                <h3 className="font-semibold mb-2">Véhicule</h3>
+                <p className="text-muted-foreground">{vehicle}</p>
+              </div>
 
-                <Separator />
+              <Separator />
 
-                {/* Services sélectionnés */}
-                <div>
-                  <h3 className="font-semibold mb-2">Services sélectionnés</h3>
+              <div>
+                <h3 className="font-semibold mb-2">Prestations</h3>
 
-                  {items.length === 0 ? (
-                    <p className="text-sm text-muted-foreground">
-                      Aucun service sélectionné.
-                    </p>
-                  ) : (
-                    <ul className="space-y-2 text-sm">
-                      {items.map((item) => (
-                        <li
-                          key={item.id}
-                          className="flex justify-between items-center"
-                        >
-                          <span>
-                            {item.title} × {item.quantity}
+                {items.length === 0 ? (
+                  <p className="text-sm text-muted-foreground">
+                    Aucun service sélectionné.
+                  </p>
+                ) : (
+                  <ul className="space-y-3 text-sm">
+                    {items.map((item) => (
+                      <li
+                        key={item.id}
+                        className="flex justify-between items-center"
+                      >
+                        <div className="flex flex-col">
+                          <span className="font-medium">{item.title}</span>
+                          <span className="text-muted-foreground text-xs">
+                            {item.price.toFixed(2)}€
                           </span>
-                          <div className="flex items-center gap-2">
-                            <span className="font-medium">
-                              {(item.price * item.quantity).toFixed(2)}€
-                            </span>
-                            <div className="flex items-center gap-1">
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handleIncrement(item.id)}
-                              >
-                                <Plus className="w-3 h-3" />
-                              </Button>
-                              <Button
-                                size="sm"
-                                variant="outline"
-                                onClick={() => handleDecrement(item.id)}
-                                disabled={item.quantity <= 1}
-                              >
-                                <Minus className="w-3 h-3" />
-                              </Button>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
+                        </div>
 
-                <Separator />
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => removeItem(item.id)}
+                          className="text-red-500 hover:text-red-700"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
 
-                {/* Total */}
-                <div className="flex justify-between items-center text-lg font-bold">
-                  <span>Total</span>
-                  <span className="text-primary">{total().toFixed(2)}€</span>
-                </div>
+              <Separator />
 
-                {/* Boutons */}
-                <div className="space-y-3 pt-4">
-                  <Button
-                    onClick={handleValidate}
-                    className="w-full"
-                    size="lg"
-                    disabled={items.length === 0}
-                  >
-                    <CheckCircle2 className="mr-2 h-5 w-5" />
-                    Valider et continuer
-                  </Button>
+              <div className="flex justify-between items-center text-lg font-bold">
+                <span>Total</span>
+                <span className="text-primary">{total().toFixed(2)}€</span>
+              </div>
 
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    onClick={() => navigate("/services")}
-                  >
-                    Modifier mes prestations
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+              <div className="space-y-3 pt-4">
+                <Button
+                  onClick={handleValidate}
+                  className="w-full"
+                  size="lg"
+                  disabled={items.length === 0}
+                >
+                  <CheckCircle2 className="mr-2 h-5 w-5" />
+                  Continuer
+                </Button>
+
+                <Button
+                  variant="outline"
+                  className="w-full"
+                  onClick={() => navigate("/services")}
+                >
+                  Modifier mes services
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
         </div>
       </main>
 
