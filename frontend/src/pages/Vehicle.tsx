@@ -3,20 +3,28 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { toast } from "sonner";
 import ManualSearchForm from "../components/ManualSearchForm.tsx";
+import { Button } from "@/components/ui/button";
+import { useCartStore } from "@/store/useCartStore";
 
 const Vehicle = () => {
   const navigate = useNavigate();
+  const selectedVehicle = useCartStore((state) => state.selectedVehicle);
 
-  // Callback appelée depuis le composant enfant
   const handleSubmitManual = (vehicle: {
     brand: string;
     model: string;
     year: string;
   }) => {
     toast.success("Véhicule identifié !");
-    navigate("/booking", {
-      state: { vehicle: `${vehicle.brand} ${vehicle.model} (${vehicle.year})` },
-    });
+    navigate("/booking");
+  };
+
+  const goToBooking = () => {
+    if (!selectedVehicle) {
+      toast.error("Veuillez sélectionner un véhicule avant de continuer.");
+      return;
+    }
+    navigate("/booking");
   };
 
   return (
@@ -32,6 +40,17 @@ const Vehicle = () => {
           </div>
 
           <ManualSearchForm onSubmit={handleSubmitManual} />
+
+          <div className="mt-8 flex justify-center">
+            <Button
+              size="lg"
+              className="w-full md:w-1/2"
+              onClick={goToBooking}
+              disabled={!selectedVehicle}
+            >
+              Aller au récapitulatif
+            </Button>
+          </div>
         </div>
       </main>
 

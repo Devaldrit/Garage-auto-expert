@@ -95,28 +95,27 @@ const Home = () => {
 
   const reviews = [
     {
-      name: "Marie Dubois",
-      vehicle: "Peugeot 208",
+      name: "Dominique H",
+      vehicle: "",
       rating: 5,
-      comment:
-        "Service impeccable, équipe très professionnelle. Ma voiture est comme neuve après la révision !",
-      date: "2025-01-15",
+      comment: "Super équipe bon travail merci à vous",
+      date: "2023-01-01",
     },
     {
-      name: "Jean Martin",
-      vehicle: "Renault Clio",
+      name: "Gwénaël G",
+      vehicle: "",
       rating: 5,
       comment:
-        "Excellent rapport qualité-prix. Travail soigné et dans les délais annoncés.",
-      date: "2025-01-10",
+        "Je fais entretenir plusieurs véhicules chez eux et ils sont très professionnels",
+      date: "2021-01-01",
     },
     {
-      name: "Sophie Lefebvre",
-      vehicle: "Citroën C3",
-      rating: 4,
+      name: "Florian K",
+      vehicle: "",
+      rating: 5,
       comment:
-        "Très bon accueil, explications claires. Je recommande ce garage !",
-      date: "2025-01-05",
+        "Vous pouvez faire confiance au garage Auto Expert pour toutes réparations ou révisions sur véhicules anciens et modernes. Le personnel est professionnel et disponible.",
+      date: "2019-01-01",
     },
   ];
 

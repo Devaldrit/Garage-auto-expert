@@ -6,77 +6,46 @@ import { Star } from "lucide-react";
 const Reviews = () => {
   const reviews = [
     {
-      name: "Marie Dubois",
-      vehicle: "Peugeot 208",
+      name: "Dominique H",
+      vehicle: "",
       rating: 5,
-      comment: "Service impeccable, équipe très professionnelle. Ma voiture est comme neuve après la révision ! Je recommande vivement ce garage.",
-      date: "2025-01-15"
+      comment: "Super équipe bon travail merci à vous",
+      date: "2023-01-01",
     },
     {
-      name: "Jean Martin",
-      vehicle: "Renault Clio",
+      name: "Gwénaël G",
+      vehicle: "",
       rating: 5,
-      comment: "Excellent rapport qualité-prix. Travail soigné et dans les délais annoncés. L'équipe a pris le temps de m'expliquer toutes les interventions.",
-      date: "2025-01-10"
+      comment:
+        "Je fais entretenir plusieurs véhicules chez eux et ils sont très professionnels",
+      date: "2021-01-01",
     },
     {
-      name: "Sophie Lefebvre",
-      vehicle: "Citroën C3",
-      rating: 4,
-      comment: "Très bon accueil, explications claires. Je recommande ce garage ! Seul petit bémol, j'ai dû attendre 10 minutes de plus que prévu.",
-      date: "2025-01-05"
-    },
-    {
-      name: "Pierre Dubois",
-      vehicle: "Volkswagen Golf",
+      name: "Florian K",
+      vehicle: "",
       rating: 5,
-      comment: "Garage de confiance, j'y vais depuis 5 ans. Jamais déçu, les prix sont corrects et le travail est toujours impeccable.",
-      date: "2024-12-28"
+      comment:
+        "Vous pouvez faire confiance au garage Auto Expert pour toutes réparations ou révisions sur véhicules anciens et modernes. Le personnel est professionnel et disponible.",
+      date: "2019-01-01",
     },
     {
-      name: "Isabelle Rousseau",
-      vehicle: "Audi A3",
+      name: "Karin G",
+      vehicle: "",
       rating: 5,
-      comment: "Très satisfaite de la prise en charge. Le diagnostic était précis et les réparations ont été effectuées rapidement. Merci !",
-      date: "2024-12-20"
-    },
-    {
-      name: "Thomas Moreau",
-      vehicle: "BMW Série 3",
-      rating: 4,
-      comment: "Bon garage avec des techniciens compétents. Les tarifs sont transparents et raisonnables pour la qualité du service.",
-      date: "2024-12-15"
-    },
-    {
-      name: "Catherine Lambert",
-      vehicle: "Renault Captur",
-      rating: 5,
-      comment: "Je suis venue pour un problème de freinage. L'équipe a été très réactive et professionnelle. Problème résolu rapidement !",
-      date: "2024-12-10"
-    },
-    {
-      name: "Laurent Petit",
-      vehicle: "Peugeot 3008",
-      rating: 5,
-      comment: "Excellent garage ! Accueil chaleureux, explications détaillées et travail de qualité. Je ne changerai pour rien au monde.",
-      date: "2024-12-05"
-    },
-    {
-      name: "Nathalie Simon",
-      vehicle: "Citroën C4",
-      rating: 4,
-      comment: "Très bon service. La vidange a été faite rapidement et proprement. Bon rapport qualité-prix.",
-      date: "2024-11-28"
+      comment: "Je recommande vivement ce garage",
+      date: "2019-01-01",
     },
   ];
 
-  const averageRating = (reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length).toFixed(1);
+  const averageRating = (
+    reviews.reduce((acc, r) => acc + r.rating, 0) / reviews.length
+  ).toFixed(1);
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
-      <main className="flex-1">
+
+      <main className="flex-">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary to-primary-dark text-primary-foreground py-16 px-4">
           <div className="container text-center">
@@ -115,7 +84,8 @@ const Reviews = () => {
               Vous aussi, faites-nous confiance !
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              Rejoignez nos clients satisfaits et profitez d'un service de qualité pour l'entretien de votre véhicule.
+              Rejoignez nos clients satisfaits et profitez d'un service de
+              qualité pour l'entretien de votre véhicule.
             </p>
             <a
               href="/"

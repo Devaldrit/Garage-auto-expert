@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -15,9 +15,8 @@ import { useCartStore } from "@/store/useCartStore";
 
 const Booking = () => {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const vehicle = location.state?.vehicle || "Véhicule non identifié";
+  const vehicle = useCartStore((state) => state.selectedVehicle);
   const items = useCartStore((state) => state.items);
   const total = useCartStore.getState().total;
   const removeItem = useCartStore((state) => state.removeItem);
@@ -48,14 +47,19 @@ const Booking = () => {
             <CardContent className="space-y-6">
               <div>
                 <h3 className="font-semibold mb-2">Véhicule</h3>
-                <p className="text-muted-foreground">{vehicle}</p>
+                <p className="text-muted-foreground">
+                  {vehicle
+                    ? `${vehicle.brand.toUpperCase()} ${vehicle.model} (${
+                        vehicle.year
+                      })`
+                    : "Aucun véhicule sélectionné"}
+                </p>
               </div>
 
               <Separator />
 
               <div>
                 <h3 className="font-semibold mb-2">Prestations</h3>
-
                 {items.length === 0 ? (
                   <p className="text-sm text-muted-foreground">
                     Aucun service sélectionné.
@@ -109,9 +113,9 @@ const Booking = () => {
                 <Button
                   variant="outline"
                   className="w-full"
-                  onClick={() => navigate("/services")}
+                  onClick={() => navigate("/")}
                 >
-                  Modifier mes services
+                  Modifier le véhicule
                 </Button>
               </div>
             </CardContent>

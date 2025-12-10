@@ -1,7 +1,18 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ServiceCard from "@/components/ServiceCard";
-import { Droplets, Wrench, Wind, Disc, Gauge, Battery, Lightbulb, Zap, Car, Shield } from "lucide-react";
+import {
+  Droplets,
+  Wrench,
+  Wind,
+  Disc,
+  Gauge,
+  Battery,
+  Lightbulb,
+  Zap,
+  Car,
+  Shield,
+} from "lucide-react";
 
 const Services = () => {
   const allServices = [
@@ -9,88 +20,107 @@ const Services = () => {
       title: "Vidange",
       description: "Vidange complète avec filtres à huile, air et carburant",
       price: "À partir de 89€",
-      image: "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
+      image: "/src/assets/images/services/vidange.jpg",
       icon: <Droplets className="h-5 w-5" />,
-      details: "Vidange complète incluant : huile moteur de qualité adaptée à votre véhicule, filtre à huile neuf, filtre à air, filtre à carburant. Contrôle gratuit des niveaux (liquide de refroidissement, lave-glace, liquide de frein) et des points de sécurité essentiels."
+      details:
+        "Vidange complète incluant : huile moteur de qualité adaptée à votre véhicule, filtre à huile neuf, filtre à air, filtre à carburant. Contrôle gratuit des niveaux et des points de sécurité essentiels.",
     },
     {
-      title: "Révision Complète",
+      title: "Révision",
       description: "Révision selon préconisations constructeur",
       price: "À partir de 149€",
-      image: "https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&q=80",
+      image: "/src/assets/images/services/revision.jpg",
       icon: <Wrench className="h-5 w-5" />,
-      details: "Révision complète avec contrôle approfondi de tous les points de sécurité selon le carnet d'entretien constructeur. Changement des filtres nécessaires, contrôle du système de freinage, direction, suspension, éclairage. Rapport détaillé avec photos."
+      details:
+        "Révision complète avec contrôle approfondi de tous les points de sécurité selon le carnet constructeur.",
+    },
+    {
+      title: "Pneumatiques",
+      description: "Montage, équilibrage et réparation",
+      price: "À partir de 29€",
+      image: "/src/assets/images/services/pneumatique.jpg",
+      icon: <Wind className="h-5 w-5" />,
+      details:
+        "Montage, équilibrage et contrôle complet de vos pneus. Pression, usure, géométrie visuelle.",
     },
     {
       title: "Freinage",
-      description: "Remplacement plaquettes et disques de frein",
+      description: "Remplacement plaquettes et disques",
       price: "À partir de 199€",
-      image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80",
+      image: "/src/assets/images/services/freinage.jpg",
       icon: <Disc className="h-5 w-5" />,
-      details: "Remplacement des plaquettes et disques de frein avant ou arrière avec pièces de qualité d'origine. Contrôle complet du circuit hydraulique, purge si nécessaire, graissage des étriers. Test sur route après intervention."
-    },
-    {
-      title: "Climatisation",
-      description: "Recharge et entretien climatisation",
-      price: "À partir de 79€",
-      image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80",
-      icon: <Wind className="h-5 w-5" />,
-      details: "Recharge complète du système de climatisation avec gaz réfrigérant R134a ou R1234yf selon votre véhicule. Contrôle d'étanchéité du circuit, désinfection antibactérienne et désodorisation complète de l'habitacle."
-    },
-    {
-      title: "Diagnostic Électronique",
-      description: "Diagnostic complet avec valise multimarque",
-      price: "À partir de 59€",
-      image: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&q=80",
-      icon: <Gauge className="h-5 w-5" />,
-      details: "Diagnostic électronique approfondi de tous les calculateurs de votre véhicule. Lecture et suppression des codes défaut, analyse des paramètres en temps réel. Rapport détaillé avec recommandations."
+      details:
+        "Remplacement des plaquettes/disques, purge et contrôle du circuit hydraulique.",
     },
     {
       title: "Batterie",
-      description: "Test et remplacement de batterie",
+      description: "Contrôle et remplacement batterie",
       price: "À partir de 119€",
-      image: "https://images.unsplash.com/photo-1593941707882-a5bba14938c7?w=800&q=80",
+      image: "/src/assets/images/services/batterie.jpg",
       icon: <Battery className="h-5 w-5" />,
-      details: "Test complet de votre batterie et du circuit de charge. Remplacement par une batterie de qualité adaptée à votre véhicule. Garantie constructeur. Recyclage gratuit de l'ancienne batterie."
+      details:
+        "Test complet et remplacement d’une batterie adaptée. Garantie constructeur incluse.",
     },
     {
-      title: "Éclairage",
-      description: "Remplacement et réglage optiques",
+      title: "Visibilité",
+      description: "Éclairage et essuie-glaces",
       price: "À partir de 39€",
-      image: "https://images.unsplash.com/photo-1449130015084-2fae5afe6b48?w=800&q=80",
+      image: "/src/assets/images/services/visibilite.jpg",
       icon: <Lightbulb className="h-5 w-5" />,
-      details: "Remplacement de toutes ampoules (codes, phares, feux de position, clignotants). Réglage précis de la hauteur des feux. Vérification du bon fonctionnement de tous les feux de signalisation."
+      details:
+        "Changement d'ampoules, réglage optique et remplacement des balais essuie-glaces.",
     },
     {
-      title: "Distribution",
-      description: "Remplacement kit de distribution",
-      price: "À partir de 549€",
-      image: "https://images.unsplash.com/photo-1632823469850-1b5dd1f2a5e7?w=800&q=80",
-      icon: <Zap className="h-5 w-5" />,
-      details: "Remplacement complet du kit de distribution (courroie ou chaîne, galets tendeurs, pompe à eau selon préconisation). Intervention cruciale pour la longévité de votre moteur. Pièces d'origine constructeur."
-    },
-    {
-      title: "Géométrie",
-      description: "Parallélisme et géométrie des trains",
-      price: "À partir de 69€",
-      image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80",
-      icon: <Car className="h-5 w-5" />,
-      details: "Réglage précis de la géométrie des trains roulants avec équipement de dernière génération. Permet d'éviter l'usure prématurée des pneus et d'améliorer la tenue de route. Rapport avec mesures avant/après."
-    },
-    {
-      title: "Contrôle Technique",
-      description: "Préparation et passage du contrôle",
+      title: "Échappement",
+      description: "Contrôle et remplacement échappement",
       price: "À partir de 89€",
-      image: "https://images.unsplash.com/photo-1580273916550-e323be2ae537?w=800&q=80",
+      image: "/src/assets/images/services/echappement.jpg",
+      icon: <Zap className="h-5 w-5" />,
+      details:
+        "Pose, soudure, diagnostic du catalyseur, silencieux et ligne d’échappement.",
+    },
+    {
+      title: "Kit de distribution",
+      description: "Remplacement kit distribution complet",
+      price: "À partir de 549€",
+      image: "/src/assets/images/services/kitDistribution.jpg",
+      icon: <Zap className="h-5 w-5" />,
+      details:
+        "Courroie/chaîne + galets + pompe à eau si applicable. Intervention vitale pour votre moteur.",
+    },
+    {
+      title: "Suspension",
+      description: "Amortisseurs & ressorts",
+      price: "À partir de 249€",
+      image: "/src/assets/images/services/suspension.jpg",
+      icon: <Car className="h-5 w-5" />,
+      details:
+        "Remplacement amortisseurs, soufflets, butées et contrôle du train roulant.",
+    },
+    {
+      title: "Pré-contrôle technique",
+      description: "Inspection avant contrôle",
+      price: "À partir de 89€",
+      image: "/src/assets/images/services/preControleTechnique.jpg",
       icon: <Shield className="h-5 w-5" />,
-      details: "Pré-contrôle technique complet pour identifier les points à corriger avant le passage officiel. Réparation des défaillances constatées. Possibilité de prise en charge et restitution de votre véhicule au centre de contrôle."
+      details:
+        "Inspection complète avant passage au contrôle technique pour éviter une contre-visite.",
+    },
+    {
+      title: "Mécanique",
+      description: "Interventions mécaniques diverses",
+      price: "Sur devis",
+      image: "/src/assets/images/services/mecanique.jpg",
+      icon: <Wrench className="h-5 w-5" />,
+      details:
+        "Embrayage, alternateur, démarreur, cardans, joints, fuites, moteur… Toutes interventions mécaniques.",
     },
   ];
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
-      
+
       <main>
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-primary to-primary-dark text-primary-foreground py-16 px-4">
@@ -99,7 +129,8 @@ const Services = () => {
               Nos Services
             </h1>
             <p className="text-lg opacity-90 max-w-2xl mx-auto">
-              Une gamme complète de prestations pour l'entretien et la réparation de votre véhicule
+              Une gamme complète de prestations pour l'entretien et la
+              réparation de votre véhicule
             </p>
           </div>
         </section>
@@ -122,7 +153,9 @@ const Services = () => {
               Besoin d'un service spécifique ?
             </h2>
             <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              N'hésitez pas à nous contacter pour toute demande particulière. Notre équipe est à votre écoute pour vous proposer la meilleure solution.
+              N'hésitez pas à nous contacter pour toute demande particulière.
+              Notre équipe est à votre écoute pour vous proposer la meilleure
+              solution.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

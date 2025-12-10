@@ -56,7 +56,7 @@ const ServiceCard = ({
   return (
     <>
       <Card className="group overflow-hidden transition-all hover:shadow-medium hover:-translate-y-1 duration-300">
-        <div className="relative h-48 overflow-hidden bg-muted">
+        <div className="relative aspect-[4/3] overflow-hidden bg-muted">
           <img
             src={image}
             alt={`Service ${title}`}
