@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -11,9 +11,10 @@ import { toast } from "sonner";
 import { useCartStore } from "@/store/useCartStore";
 
 const Confirm = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { vehicle } = location.state || {};
+
+  const selectedVehicle = useCartStore((state) => state.selectedVehicle);
+  const clearVehicle = useCartStore((state) => state.clearVehicle);
 
   const items = useCartStore((state) => state.items);
   const removeItem = useCartStore((state) => state.removeItem);
@@ -41,10 +42,14 @@ Nom : ${name}
 Prénom : ${firstname}
 Email : ${email}
 Téléphone : ${phone}
-Véhicule : ${vehicle || "Non spécifié"}
+Véhicule : ${
+      selectedVehicle
+        ? `${selectedVehicle.brand} ${selectedVehicle.model} (${selectedVehicle.year})`
+        : "Non spécifié"
+    }
 Services : ${items.map((i) => i.title).join(", ")}
 Total : ${total().toFixed(2)}€
-    `;
+`;
 
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}`, {
@@ -64,7 +69,9 @@ Total : ${total().toFixed(2)}€
       }
 
       toast.success("Votre demande de devis a bien été envoyée.");
+
       form.reset();
+      clearVehicle();
 
       setTimeout(() => navigate("/success"), 1500);
     } catch (err: any) {
@@ -90,7 +97,6 @@ Total : ${total().toFixed(2)}€
 
           <div className="grid md:grid-cols-5 gap-8">
             <div className="md:col-span-3">
-              {/* Formulaire */}
               <Card>
                 <CardContent>
                   <form onSubmit={handleConfirm} className="space-y-6">
@@ -122,12 +128,17 @@ Total : ${total().toFixed(2)}€
                       <CheckCircle2 className="mr-2 h-5 w-5" />
                       Envoyer la demande
                     </Button>
+
+                    <p className="text-xs text-muted-foreground text-center mt-2">
+                      Vos informations sont utilisées uniquement pour établir et
+                      envoyer votre devis. Elles ne sont pas stockées et ne sont
+                      jamais transmises à des tiers.
+                    </p>
                   </form>
                 </CardContent>
               </Card>
             </div>
 
-            {/* Récap */}
             <div className="md:col-span-2">
               <Card className="sticky top-20">
                 <CardHeader>
@@ -139,7 +150,11 @@ Total : ${total().toFixed(2)}€
                     <h4 className="font-semibold text-sm text-muted-foreground mb-1">
                       Véhicule
                     </h4>
-                    <p className="text-sm">{vehicle || "Non spécifié"}</p>
+                    <p className="text-sm">
+                      {selectedVehicle
+                        ? `${selectedVehicle.brand} ${selectedVehicle.model} (${selectedVehicle.year})`
+                        : "Non spécifié"}
+                    </p>
                   </div>
 
                   <Separator />

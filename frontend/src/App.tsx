@@ -11,6 +11,7 @@ import Reviews from "./pages/Reviews";
 import Confirm from "./pages/confirm";
 import NotFound from "./pages/NotFound";
 import OrderConfirmation from "./pages/successful";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/reviews" element={<Reviews />} />
           <Route path="/confirm" element={<Confirm />} />
           <Route path="/success" element={<OrderConfirmation />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

@@ -82,6 +82,14 @@ const Footer = () => {
             "La confiance, ça s'entretient !"
           </p>
         </div>
+        <div className="mt-4 text-center">
+          <a
+            href="/privacy-policy"
+            className="text-sm hover:text-accent transition-colors underline"
+          >
+            Politique de Confidentialité (RGPD)
+          </a>
+        </div>
       </div>
     </footer>
   );

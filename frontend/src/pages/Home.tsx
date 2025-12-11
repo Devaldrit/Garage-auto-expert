@@ -353,6 +353,11 @@ const Home = () => {
                 >
                   Envoyer le message
                 </Button>
+                <p className="text-xs text-muted-foreground text-center mt-2">
+                  Les informations transmises sont utilisées uniquement pour
+                  répondre à votre message. Elles ne sont pas stockées en base
+                  de données et ne sont jamais partagées à des tiers.
+                </p>
               </div>
             </form>
           </div>
