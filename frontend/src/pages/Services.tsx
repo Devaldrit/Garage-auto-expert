@@ -17,6 +17,7 @@ import {
 const Services = () => {
   const allServices = [
     {
+      idService: 1,
       title: "Vidange",
       description: "Vidange complète avec filtres à huile, air et carburant",
       price: "À partir de 89€",
@@ -26,6 +27,7 @@ const Services = () => {
         "Vidange complète incluant : huile moteur de qualité adaptée à votre véhicule, filtre à huile neuf, filtre à air, filtre à carburant. Contrôle gratuit des niveaux et des points de sécurité essentiels.",
     },
     {
+      idService: 2,
       title: "Révision",
       description: "Révision selon préconisations constructeur",
       price: "À partir de 149€",
@@ -35,6 +37,7 @@ const Services = () => {
         "Révision complète avec contrôle approfondi de tous les points de sécurité selon le carnet constructeur.",
     },
     {
+      idService: 3,
       title: "Pneumatiques",
       description: "Montage, équilibrage et réparation",
       price: "À partir de 29€",
@@ -44,6 +47,7 @@ const Services = () => {
         "Montage, équilibrage et contrôle complet de vos pneus. Pression, usure, géométrie visuelle.",
     },
     {
+      idService: 4,
       title: "Freinage",
       description: "Remplacement plaquettes et disques",
       price: "À partir de 199€",
@@ -53,6 +57,7 @@ const Services = () => {
         "Remplacement des plaquettes/disques, purge et contrôle du circuit hydraulique.",
     },
     {
+      idService: 5,
       title: "Batterie",
       description: "Contrôle et remplacement batterie",
       price: "À partir de 119€",
@@ -62,6 +67,7 @@ const Services = () => {
         "Test complet et remplacement d’une batterie adaptée. Garantie constructeur incluse.",
     },
     {
+      idService: 7,
       title: "Visibilité",
       description: "Éclairage et essuie-glaces",
       price: "À partir de 39€",
@@ -71,6 +77,7 @@ const Services = () => {
         "Changement d'ampoules, réglage optique et remplacement des balais essuie-glaces.",
     },
     {
+      idService: 8,
       title: "Échappement",
       description: "Contrôle et remplacement échappement",
       price: "À partir de 89€",
@@ -80,6 +87,7 @@ const Services = () => {
         "Pose, soudure, diagnostic du catalyseur, silencieux et ligne d’échappement.",
     },
     {
+      idService: 9,
       title: "Kit de distribution",
       description: "Remplacement kit distribution complet",
       price: "À partir de 549€",
@@ -89,6 +97,7 @@ const Services = () => {
         "Courroie/chaîne + galets + pompe à eau si applicable. Intervention vitale pour votre moteur.",
     },
     {
+      idService: 10,
       title: "Suspension",
       description: "Amortisseurs & ressorts",
       price: "À partir de 249€",
@@ -98,6 +107,7 @@ const Services = () => {
         "Remplacement amortisseurs, soufflets, butées et contrôle du train roulant.",
     },
     {
+      idService: 11,
       title: "Pré-contrôle technique",
       description: "Inspection avant contrôle",
       price: "À partir de 89€",
@@ -107,6 +117,7 @@ const Services = () => {
         "Inspection complète avant passage au contrôle technique pour éviter une contre-visite.",
     },
     {
+      idService: 12,
       title: "Mécanique",
       description: "Interventions mécaniques diverses",
       price: "Sur devis",
@@ -140,7 +151,11 @@ const Services = () => {
           <div className="container">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {allServices.map((service, index) => (
-                <ServiceCard id={0} key={index} {...service} />
+                <ServiceCard
+                  key={service.idService}
+                  id={service.idService}
+                  {...service}
+                />
               ))}
             </div>
           </div>
