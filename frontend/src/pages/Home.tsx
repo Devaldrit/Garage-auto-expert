@@ -1,19 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import ServiceCard from "@/components/ServiceCard";
 import ReviewCard from "@/components/ReviewCard";
 import { Button } from "@/components/ui/button";
-import {
-  Shield,
-  Award,
-  Clock,
-  Wrench,
-  Droplets,
-  Wind,
-  Disc,
-  Star,
-} from "lucide-react";
+import { Shield, Award, Clock, Star } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -27,6 +17,7 @@ import HeroSection from "@/components/HeroSection.tsx";
 import bgImage from "../assets/images/logo/heroBackground.jpg";
 import logoNoText from "../assets/images/logo/LogoNoText.jpg";
 import OffersCarousel from "@/components/OffersCarousel.tsx";
+import WorkshopServices from "../components/WorkshopServices";
 
 import offre1 from "../assets/images/promotions/promotion-kit-de-distribution-garage-toulouse.png";
 import offre2 from "../assets/images/promotions/promotion-entretien-vehicule-garage-ad-toulouse.png";
@@ -45,53 +36,6 @@ const Home = () => {
       state: { vehicle: `${vehicle.brand} ${vehicle.model} (${vehicle.year})` },
     });
   };
-
-  const services = [
-    {
-      id: 1,
-      title: "Vidange",
-      description: "Vidange complète avec filtres à huile, air et carburant",
-      price: "À partir de 89€",
-      image:
-        "https://images.unsplash.com/photo-1486262715619-67b85e0b08d3?w=800&q=80",
-      icon: <Droplets className="h-5 w-5" />,
-      details:
-        "Vidange complète incluant : huile moteur de qualité, filtre à huile, filtre à air, filtre à carburant. Contrôle des niveaux et points de sécurité.",
-    },
-    {
-      id: 2,
-      title: "Révision",
-      description: "Révision complète selon préconisations constructeur",
-      price: "À partir de 149€",
-      image:
-        "https://images.unsplash.com/photo-1625047509168-a7026f36de04?w=800&q=80",
-      icon: <Wrench className="h-5 w-5" />,
-      details:
-        "Révision complète avec contrôle de tous les points de sécurité, changement des filtres nécessaires, contrôle freinage, direction, suspension.",
-    },
-    {
-      id: 3,
-      title: "Freinage",
-      description: "Remplacement plaquettes et disques de frein",
-      price: "À partir de 199€",
-      image:
-        "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=800&q=80",
-      icon: <Disc className="h-5 w-5" />,
-      details:
-        "Remplacement des plaquettes et disques de frein avant ou arrière. Contrôle du circuit hydraulique et purge si nécessaire.",
-    },
-    {
-      id: 4,
-      title: "Climatisation",
-      description: "Recharge et entretien climatisation",
-      price: "À partir de 79€",
-      image:
-        "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=800&q=80",
-      icon: <Wind className="h-5 w-5" />,
-      details:
-        "Recharge complète du système de climatisation, contrôle d'étanchéité, désinfection et désodorisation de l'habitacle.",
-    },
-  ];
 
   const reviews = [
     {
@@ -148,29 +92,7 @@ const Home = () => {
           </div>
         </section>
 
-        <section className="py-16 px-4 bg-muted/30">
-          <div className="container">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Nos Services
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Des prestations de qualité pour l'entretien et la réparation de
-                votre véhicule
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-              {services.map((service) => (
-                <ServiceCard key={service.id} {...service} />
-              ))}
-            </div>
-            <div className="text-center">
-              <Button size="lg" asChild>
-                <Link to="/services">Voir tous nos services</Link>
-              </Button>
-            </div>
-          </div>
-        </section>
+        <WorkshopServices />
 
         <section className="py-16 px-4">
           <div className="container">
@@ -283,8 +205,13 @@ const Home = () => {
                     throw new Error(data.error || "Erreur lors de l'envoi");
                   toast.success("Votre message a bien été envoyé !");
                   form.reset();
-                } catch (err: any) {
-                  toast.error(err.message || "Impossible d'envoyer le message");
+                } catch (err) {
+                  const errorMessage =
+                    err instanceof Error
+                      ? err.message
+                      : "Impossible d'envoyer le message";
+
+                  toast.error(errorMessage);
                 }
               }}
               className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-white p-8 rounded-2xl shadow-md"
