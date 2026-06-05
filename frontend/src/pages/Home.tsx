@@ -19,9 +19,9 @@ import logoNoText from "../assets/images/logo/LogoNoText.jpg";
 import OffersCarousel from "@/components/OffersCarousel.tsx";
 import WorkshopServices from "../components/WorkshopServices";
 
-import offre1 from "../assets/images/promotions/promotion-kit-de-distribution-garage-toulouse.png";
-import offre2 from "../assets/images/promotions/promotion-entretien-vehicule-garage-ad-toulouse.png";
-import offre3 from "../assets/images/promotions/offre-pomo-1.jpg";
+import offre1 from "../assets/images/promotions/pneus-promo.jpg";
+import offre2 from "../assets/images/promotions/batteries-promo.jpg";
+import offre3 from "../assets/images/promotions/bilan-promo.jpg";
 
 const Home = () => {
   const navigate = useNavigate();
