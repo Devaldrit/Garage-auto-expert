@@ -26,16 +26,7 @@ import offre3 from "../assets/images/promotions/bilan-promo.jpg";
 const Home = () => {
   const navigate = useNavigate();
 
-  const handleSubmitManual = (vehicle: {
-    brand: string;
-    model: string;
-    year: string;
-  }) => {
-    toast.success("Véhicule identifié !");
-    navigate("/booking", {
-      state: { vehicle: `${vehicle.brand} ${vehicle.model} (${vehicle.year})` },
-    });
-  };
+  
 
   const reviews = [
     {
@@ -88,7 +79,7 @@ const Home = () => {
             </p>
           </div>
           <div className="container max-w-3xl">
-            <ManualSearchForm onSubmit={handleSubmitManual} />
+            <ManualSearchForm/>
           </div>
         </section>
 

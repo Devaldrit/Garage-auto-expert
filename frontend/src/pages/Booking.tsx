@@ -17,6 +17,7 @@ const Booking = () => {
   const navigate = useNavigate();
 
   const vehicle = useCartStore((state) => state.selectedVehicle);
+  const plate = useCartStore((state) => state.selectedPlate);
   const items = useCartStore((state) => state.items);
   const total = useCartStore.getState().total;
   const removeItem = useCartStore((state) => state.removeItem);
@@ -47,13 +48,28 @@ const Booking = () => {
             <CardContent className="space-y-6">
               <div>
                 <h3 className="font-semibold mb-2">Véhicule</h3>
-                <p className="text-muted-foreground">
-                  {vehicle
-                    ? `${vehicle.brand.toUpperCase()} ${vehicle.model} (${
-                        vehicle.year
-                      })`
-                    : "Aucun véhicule sélectionné"}
-                </p>
+
+                {vehicle ? (
+                  <div className="space-y-1 text-muted-foreground">
+                    <p>
+                      {vehicle.brand.toUpperCase()} {vehicle.model} (
+                      {vehicle.year})
+                    </p>
+
+                    {plate && (
+                      <p>
+                        Plaque :{" "}
+                        <span className="font-medium tracking-widest text-foreground">
+                          {plate}
+                        </span>
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <p className="text-muted-foreground">
+                    Aucun véhicule sélectionné
+                  </p>
+                )}
               </div>
 
               <Separator />

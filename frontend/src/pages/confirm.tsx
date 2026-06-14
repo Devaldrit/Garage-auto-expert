@@ -19,6 +19,8 @@ const Confirm = () => {
   const items = useCartStore((state) => state.items);
   const removeItem = useCartStore((state) => state.removeItem);
   const total = useCartStore.getState().total;
+  const selectedPlate = useCartStore((state) => state.selectedPlate);
+  const clearPlate = useCartStore((state) => state.clearPlate);
 
   const handleConfirm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,6 +49,7 @@ Véhicule : ${
         ? `${selectedVehicle.brand} ${selectedVehicle.model} (${selectedVehicle.year})`
         : "Non spécifié"
     }
+Plaque : ${selectedPlate ?? "Non spécifiée"}
 Services : ${items.map((i) => i.title).join(", ")}
 Total : ${total().toFixed(2)}€
 `;
@@ -147,14 +150,28 @@ Total : ${total().toFixed(2)}€
 
                 <CardContent className="space-y-4">
                   <div>
-                    <h4 className="font-semibold text-sm text-muted-foreground mb-1">
+                    <h4 className="font-semibold text-sm text-muted-foreground mb-2">
                       Véhicule
                     </h4>
-                    <p className="text-sm">
-                      {selectedVehicle
-                        ? `${selectedVehicle.brand} ${selectedVehicle.model} (${selectedVehicle.year})`
-                        : "Non spécifié"}
-                    </p>
+
+                    {selectedVehicle ? (
+                      <div className="space-y-2">
+                        <p className="text-sm">
+                          {selectedVehicle.brand} {selectedVehicle.model} (
+                          {selectedVehicle.year})
+                        </p>
+
+                        {selectedPlate && (
+                          <div className="inline-flex items-center rounded-md bg-muted px-3 py-1 text-xs font-medium tracking-widest">
+                            {selectedPlate}
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      <p className="text-sm text-muted-foreground">
+                        Non spécifié
+                      </p>
+                    )}
                   </div>
 
                   <Separator />
