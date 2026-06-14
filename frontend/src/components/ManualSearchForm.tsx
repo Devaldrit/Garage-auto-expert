@@ -157,7 +157,7 @@ const VehicleForm = () => {
   const showSummary = hasVehicle && !isEditing;
 
   return (
-    <section className="bg-gradient-to-br from-primary to-primary-dark py-16 px-4">
+    <section>
       <div className="container max-w-3xl mx-auto">
         {showSummary ? (
           <Card className="shadow-xl border-0 rounded-3xl">

@@ -120,7 +120,7 @@ const Services = () => {
       idService: 12,
       title: "Mécanique",
       description: "Interventions mécaniques diverses",
-      price: "Sur devis",
+      price: "A partir de 100€",
       image: "/src/assets/images/services/mecanique.jpg",
       icon: <Wrench className="h-5 w-5" />,
       details:
