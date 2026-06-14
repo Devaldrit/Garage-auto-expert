@@ -1,6 +1,6 @@
 import { Link, useLocation } from "react-router-dom";
 import { MapPin, Phone, ShoppingCart } from "lucide-react";
-import logo from "../assets/images/logo/logoLightText.png";
+import logo from "../assets/images/logo/logoLightText.webp";
 
 const Header = () => {
   const location = useLocation();

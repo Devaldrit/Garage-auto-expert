@@ -2,21 +2,21 @@ import WorkshopServiceCard, {
   type WorkshopServiceCardProps,
 } from "./WorkshopServiceCard";
 import { Link } from "react-router-dom";
-import batterieImage from "../assets/images/servicesLogo/picto_menu_service_batterie.png";
-import carrosserieImage from "../assets/images/servicesLogo/carrosserie.png";
-import climatisationImage from "../assets/images/servicesLogo/picto_menu_service_climatisation.png";
-import controleTechniqueImage from "../assets/images/servicesLogo/picto_menu_service_controle_technique.png";
-import distributionImage from "../assets/images/servicesLogo/picto_menu_service_distribution.png";
-import echappementImage from "../assets/images/servicesLogo/picto_menu_service_echapement.png";
-import freinageImage from "../assets/images/servicesLogo/picto_menu_service_freinage.png";
-import mecaniqueImage from "../assets/images/servicesLogo/picto_menu_service_mecanique.png";
-import pneumatiquesImage from "../assets/images/servicesLogo/picto_menu_service_pneumatique.png";
-import revisionImage from "../assets/images/servicesLogo/picto_menu_service_revision.png";
-import suspensionImage from "../assets/images/servicesLogo/picto_menu_service_suspension.png";
-import vidangeImage from "../assets/images/servicesLogo/picto_menu_service_vidange.png";
-import visibiliteImage from "../assets/images/servicesLogo/picto_menu_service_visibilite.png";
-import autoradioImage from "../assets/images/servicesLogo/reparation_autoradio(1).png";
-import vitrageImage from "../assets/images/servicesLogo/vitrage.png";
+import batterieImage from "../assets/images/servicesLogo/picto_menu_service_batterie.webp";
+import carrosserieImage from "../assets/images/servicesLogo/carrosserie.webp";
+import climatisationImage from "../assets/images/servicesLogo/picto_menu_service_climatisation.webp";
+import controleTechniqueImage from "../assets/images/servicesLogo/picto_menu_service_controle_technique.webp";
+import distributionImage from "../assets/images/servicesLogo/picto_menu_service_distribution.webp";
+import echappementImage from "../assets/images/servicesLogo/picto_menu_service_echapement.webp";
+import freinageImage from "../assets/images/servicesLogo/picto_menu_service_freinage.webp";
+import mecaniqueImage from "../assets/images/servicesLogo/picto_menu_service_mecanique.webp";
+import pneumatiquesImage from "../assets/images/servicesLogo/picto_menu_service_pneumatique.webp";
+import revisionImage from "../assets/images/servicesLogo/picto_menu_service_revision.webp";
+import suspensionImage from "../assets/images/servicesLogo/picto_menu_service_suspension.webp";
+import vidangeImage from "../assets/images/servicesLogo/picto_menu_service_vidange.webp";
+import visibiliteImage from "../assets/images/servicesLogo/picto_menu_service_visibilite.webp";
+import autoradioImage from "../assets/images/servicesLogo/reparation_autoradio(1).webp";
+import vitrageImage from "../assets/images/servicesLogo/vitrage.webp";
 
 const services: WorkshopServiceCardProps[] = [
   {

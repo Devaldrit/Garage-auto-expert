@@ -14,19 +14,17 @@ import {
 import { toast } from "sonner";
 import ManualSearchForm from "../components/ManualSearchForm.tsx";
 import HeroSection from "@/components/HeroSection.tsx";
-import bgImage from "../assets/images/logo/heroBackground.jpg";
-import logoNoText from "../assets/images/logo/LogoNoText.jpg";
+import bgImage from "../assets/images/logo/heroBackground.webp";
+import logoNoText from "../assets/images/logo/LogoNoText.webp";
 import OffersCarousel from "@/components/OffersCarousel.tsx";
 import WorkshopServices from "../components/WorkshopServices";
 
-import offre1 from "../assets/images/promotions/pneus-promo.jpg";
-import offre2 from "../assets/images/promotions/batteries-promo.jpg";
-import offre3 from "../assets/images/promotions/bilan-promo.jpg";
+import offre1 from "../assets/images/promotions/pneus-promo.webp";
+import offre2 from "../assets/images/promotions/batteries-promo.webp";
+import offre3 from "../assets/images/promotions/bilan-promo.webp";
 
 const Home = () => {
   const navigate = useNavigate();
-
-  
 
   const reviews = [
     {
@@ -79,7 +77,7 @@ const Home = () => {
             </p>
           </div>
           <div className="container max-w-3xl">
-            <ManualSearchForm/>
+            <ManualSearchForm />
           </div>
         </section>
 

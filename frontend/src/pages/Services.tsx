@@ -21,7 +21,7 @@ const Services = () => {
       title: "Vidange",
       description: "Vidange complète avec filtres à huile, air et carburant",
       price: "À partir de 89€",
-      image: "/src/assets/images/services/vidange.jpg",
+      image: "/src/assets/images/services/vidange.webp",
       icon: <Droplets className="h-5 w-5" />,
       details:
         "Vidange complète incluant : huile moteur de qualité adaptée à votre véhicule, filtre à huile neuf, filtre à air, filtre à carburant. Contrôle gratuit des niveaux et des points de sécurité essentiels.",
@@ -31,7 +31,7 @@ const Services = () => {
       title: "Révision",
       description: "Révision selon préconisations constructeur",
       price: "À partir de 149€",
-      image: "/src/assets/images/services/revision.jpg",
+      image: "/src/assets/images/services/revision.webp",
       icon: <Wrench className="h-5 w-5" />,
       details:
         "Révision complète avec contrôle approfondi de tous les points de sécurité selon le carnet constructeur.",
@@ -41,7 +41,7 @@ const Services = () => {
       title: "Pneumatiques",
       description: "Montage, équilibrage et réparation",
       price: "À partir de 29€",
-      image: "/src/assets/images/services/pneumatique.jpg",
+      image: "/src/assets/images/services/pneumatique.webp",
       icon: <Wind className="h-5 w-5" />,
       details:
         "Montage, équilibrage et contrôle complet de vos pneus. Pression, usure, géométrie visuelle.",
@@ -51,7 +51,7 @@ const Services = () => {
       title: "Freinage",
       description: "Remplacement plaquettes et disques",
       price: "À partir de 199€",
-      image: "/src/assets/images/services/freinage.jpg",
+      image: "/src/assets/images/services/freinage.webp",
       icon: <Disc className="h-5 w-5" />,
       details:
         "Remplacement des plaquettes/disques, purge et contrôle du circuit hydraulique.",
@@ -61,7 +61,7 @@ const Services = () => {
       title: "Batterie",
       description: "Contrôle et remplacement batterie",
       price: "À partir de 119€",
-      image: "/src/assets/images/services/batterie.jpg",
+      image: "/src/assets/images/services/batterie.webp",
       icon: <Battery className="h-5 w-5" />,
       details:
         "Test complet et remplacement d’une batterie adaptée. Garantie constructeur incluse.",
@@ -71,7 +71,7 @@ const Services = () => {
       title: "Visibilité",
       description: "Éclairage et essuie-glaces",
       price: "À partir de 39€",
-      image: "/src/assets/images/services/visibilite.jpg",
+      image: "/src/assets/images/services/visibilite.webp",
       icon: <Lightbulb className="h-5 w-5" />,
       details:
         "Changement d'ampoules, réglage optique et remplacement des balais essuie-glaces.",
@@ -81,7 +81,7 @@ const Services = () => {
       title: "Échappement",
       description: "Contrôle et remplacement échappement",
       price: "À partir de 89€",
-      image: "/src/assets/images/services/echappement.jpg",
+      image: "/src/assets/images/services/echappement.webp",
       icon: <Zap className="h-5 w-5" />,
       details:
         "Pose, soudure, diagnostic du catalyseur, silencieux et ligne d’échappement.",
@@ -91,7 +91,7 @@ const Services = () => {
       title: "Kit de distribution",
       description: "Remplacement kit distribution complet",
       price: "À partir de 549€",
-      image: "/src/assets/images/services/kitDistribution.jpg",
+      image: "/src/assets/images/services/kitDistribution.webp",
       icon: <Zap className="h-5 w-5" />,
       details:
         "Courroie/chaîne + galets + pompe à eau si applicable. Intervention vitale pour votre moteur.",
@@ -101,7 +101,7 @@ const Services = () => {
       title: "Suspension",
       description: "Amortisseurs & ressorts",
       price: "À partir de 249€",
-      image: "/src/assets/images/services/suspension.jpg",
+      image: "/src/assets/images/services/suspension.webp",
       icon: <Car className="h-5 w-5" />,
       details:
         "Remplacement amortisseurs, soufflets, butées et contrôle du train roulant.",
@@ -111,7 +111,7 @@ const Services = () => {
       title: "Pré-contrôle technique",
       description: "Inspection avant contrôle",
       price: "À partir de 89€",
-      image: "/src/assets/images/services/preControleTechnique.jpg",
+      image: "/src/assets/images/services/preControleTechnique.webp",
       icon: <Shield className="h-5 w-5" />,
       details:
         "Inspection complète avant passage au contrôle technique pour éviter une contre-visite.",
@@ -121,7 +121,7 @@ const Services = () => {
       title: "Mécanique",
       description: "Interventions mécaniques diverses",
       price: "A partir de 100€",
-      image: "/src/assets/images/services/mecanique.jpg",
+      image: "/src/assets/images/services/mecanique.webp",
       icon: <Wrench className="h-5 w-5" />,
       details:
         "Embrayage, alternateur, démarreur, cardans, joints, fuites, moteur… Toutes interventions mécaniques.",
