@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useCartStore } from "@/store/useCartStore";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Link } from "react-router-dom";
+
 import {
   Select,
   SelectContent,
@@ -9,6 +13,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
 import {
   Card,
   CardContent,
@@ -16,21 +21,27 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Search } from "lucide-react";
-import { useCartStore } from "@/store/useCartStore";
 
-interface ManualSearchFormProps {
-  onSubmit?: (vehicle: { brand: string; model: string; year: string }) => void;
-}
+import { Car, CheckCircle2, Pencil } from "lucide-react";
+import { toast } from "sonner";
 
-const ManualSearchForm = ({ onSubmit }: ManualSearchFormProps) => {
-  const selectedVehicle = useCartStore((state) => state.selectedVehicle);
-  const setVehicle = useCartStore((state) => state.setVehicle);
-  const clearVehicle = useCartStore((state) => state.clearVehicle);
+const VehicleForm = () => {
+  const {
+    selectedVehicle,
+    selectedPlate,
+    setVehicle,
+    setPlate,
+    clearVehicle,
+    clearPlate,
+  } = useCartStore();
 
   const [brand, setBrand] = useState("");
   const [model, setModel] = useState("");
   const [year, setYear] = useState("");
+  const [plate, setPlateInput] = useState("");
+
+  // Permet de repasser au formulaire
+  const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
     if (selectedVehicle) {
@@ -38,134 +49,280 @@ const ManualSearchForm = ({ onSubmit }: ManualSearchFormProps) => {
       setModel(selectedVehicle.model);
       setYear(selectedVehicle.year);
     }
-  }, [selectedVehicle]);
+
+    if (selectedPlate) {
+      setPlateInput(selectedPlate);
+    }
+  }, [selectedVehicle, selectedPlate]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!brand || !model || !year) return;
 
-    const vehicleData = { brand, model, year };
+    if (!brand || !model || !year || !plate) {
+      toast.error("Veuillez remplir tous les champs.");
+      return;
+    }
 
-    setVehicle(vehicleData);
+    const formattedPlate = plate.trim().toUpperCase();
 
-    if (onSubmit) onSubmit(vehicleData);
+    setVehicle({
+      brand,
+      model,
+      year,
+    });
+
+    setPlate(formattedPlate);
+
+    setIsEditing(false);
+
+    toast.success("Véhicule enregistré.");
   };
 
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const carBrands = [
+    "Abarth",
+    "Acura",
+    "Aiways",
+    "Alfa Romeo",
+    "Alpine",
+    "Aston Martin",
+    "Audi",
+    "Bentley",
+    "BMW",
+    "Bugatti",
+    "BYD",
+    "Cadillac",
+    "Chevrolet",
+    "Chrysler",
+    "Citroën",
+    "Cupra",
+    "Dacia",
+    "Daewoo",
+    "Daihatsu",
+    "Dodge",
+    "DS Automobiles",
+    "Ferrari",
+    "Fiat",
+    "Ford",
+    "Genesis",
+    "GMC",
+    "Honda",
+    "Hummer",
+    "Hyundai",
+    "Infiniti",
+    "Isuzu",
+    "Iveco",
+    "Jaguar",
+    "Jeep",
+    "Kia",
+    "Lada",
+    "Lamborghini",
+    "Lancia",
+    "Land Rover",
+    "Lexus",
+    "Lotus",
+    "Lucid",
+    "Maserati",
+    "Mazda",
+    "McLaren",
+    "Mercedes-Benz",
+    "MG",
+    "Mini",
+    "Mitsubishi",
+    "Nissan",
+    "Opel",
+    "Peugeot",
+    "Polestar",
+    "Porsche",
+    "Renault",
+    "Rolls-Royce",
+    "Saab",
+    "Seat",
+    "Skoda",
+    "Smart",
+    "SsangYong",
+    "Subaru",
+    "Suzuki",
+    "Tesla",
+    "Toyota",
+    "Volkswagen",
+    "Volvo",
+  ];
+
+  const hasVehicle = selectedVehicle !== null && selectedPlate !== null;
+
+  const showSummary = hasVehicle && !isEditing;
+
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Saisie manuelle</CardTitle>
-        <CardDescription>
-          Renseignez les caractéristiques de votre véhicule
-        </CardDescription>
-      </CardHeader>
+    <section className="bg-gradient-to-br from-primary to-primary-dark py-16 px-4">
+      <div className="container max-w-3xl mx-auto">
+        {showSummary ? (
+          <Card className="shadow-xl border-0 rounded-3xl">
+            <CardContent className="p-8">
+              <div className="flex flex-col items-center text-center">
+                <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center mb-4">
+                  <CheckCircle2 className="h-8 w-8 text-green-600" />
+                </div>
 
-      <CardContent className="space-y-4">
-        {selectedVehicle ? (
-          <div className="p-5 rounded-xl border bg-gradient-to-br from-gray-50 to-gray-100 shadow-sm">
-            <div className="flex items-center gap-4">
-              <div className="flex items-center justify-center h-14 w-14 rounded-full bg-primary/10">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-7 w-7 text-primary"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="M3 13l2-5h14l2 5" />
-                  <path d="M5 13v6" />
-                  <path d="M19 13v6" />
-                  <circle cx="7.5" cy="18.5" r="2.5" />
-                  <circle cx="16.5" cy="18.5" r="2.5" />
-                </svg>
-              </div>
+                <h2 className="text-2xl font-bold">Véhicule sélectionné</h2>
 
-              <div className="flex-1">
-                <p className="font-semibold text-lg">
-                  {selectedVehicle.brand.toUpperCase()} {selectedVehicle.model}
+                <p className="text-muted-foreground mt-2">
+                  Vos informations ont été enregistrées.
                 </p>
-                <p className="text-muted-foreground text-sm">
-                  Année : {selectedVehicle.year}
+
+                <div className="w-full mt-8 space-y-4">
+                  <div className="rounded-xl border p-4">
+                    <p className="text-sm text-muted-foreground">Véhicule</p>
+
+                    <p className="font-semibold text-lg">
+                      {selectedVehicle.brand} {selectedVehicle.model}
+                    </p>
+
+                    <p className="text-muted-foreground">
+                      {selectedVehicle.year}
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border p-4">
+                    <p className="text-sm text-muted-foreground">
+                      Plaque d'immatriculation
+                    </p>
+
+                    <p className="font-semibold text-lg tracking-widest">
+                      {selectedPlate}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex gap-3 mt-8">
+                  <Button variant="outline" onClick={handleEdit}>
+                    <Pencil className="mr-2 h-4 w-4" />
+                    Modifier
+                  </Button>
+                </div>
+                <p className="text-muted-foreground mt-6">
+                  Votre véhicule est désormais configuré.{" "}
+                  <Link
+                    to="/services"
+                    className="font-medium text-primary hover:underline"
+                  >
+                    Consultez nos services
+                  </Link>{" "}
+                  pour établir votre devis personnalisé.
                 </p>
               </div>
-            </div>
-
-            <Button
-              variant="outline"
-              size="sm"
-              className="mt-4 w-full"
-              onClick={() => {
-                clearVehicle();
-                setBrand("");
-                setModel("");
-                setYear("");
-              }}
-            >
-              Modifier le véhicule
-            </Button>
-          </div>
+            </CardContent>
+          </Card>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <Label htmlFor="brand">Marque</Label>
-              <Select value={brand} onValueChange={setBrand}>
-                <SelectTrigger id="brand" className="mt-2">
-                  <SelectValue placeholder="Sélectionnez une marque" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="peugeot">Peugeot</SelectItem>
-                  <SelectItem value="renault">Renault</SelectItem>
-                  <SelectItem value="citroen">Citroën</SelectItem>
-                  <SelectItem value="volkswagen">Volkswagen</SelectItem>
-                  <SelectItem value="audi">Audi</SelectItem>
-                  <SelectItem value="bmw">BMW</SelectItem>
-                  <SelectItem value="mercedes">Mercedes</SelectItem>
-                  <SelectItem value="opel">Opel</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
+          <Card className="shadow-xl border-0 rounded-3xl bg-white">
+            <CardHeader className="text-center space-y-4">
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                <Car className="h-8 w-8 text-primary" />
+              </div>
 
-            <div>
-              <Label htmlFor="model">Modèle</Label>
-              <Input
-                id="model"
-                type="text"
-                placeholder="Ex: 308, Clio, C3..."
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-                className="mt-2"
-                required
-              />
-            </div>
+              <CardTitle className="text-3xl text-black">
+                Sélectionnez votre véhicule
+              </CardTitle>
 
-            <div>
-              <Label htmlFor="year">Année</Label>
-              <Select value={year} onValueChange={setYear}>
-                <SelectTrigger id="year" className="mt-2">
-                  <SelectValue placeholder="Sélectionnez une année" />
-                </SelectTrigger>
-                <SelectContent>
-                  {Array.from({ length: 25 }, (_, i) => 2025 - i).map((y) => (
-                    <SelectItem key={y} value={y.toString()}>
-                      {y}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-            </div>
+              <CardDescription className="max-w-xl mx-auto text-base">
+                Renseignez les informations de votre véhicule afin d'adapter
+                précisément votre devis et les services proposés.
+              </CardDescription>
+            </CardHeader>
 
-            <Button type="submit" className="w-full" size="lg">
-              <Search className="mr-2 h-5 w-5" />
-              Valider le véhicule
-            </Button>
-          </form>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Marque */}
+                <div className="space-y-2">
+                  <Label htmlFor="brand">Marque</Label>
+
+                  <Select value={brand} onValueChange={setBrand}>
+                    <SelectTrigger id="brand" className="h-12">
+                      <SelectValue placeholder="Sélectionnez une marque" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      {carBrands
+                        .sort((a, b) => a.localeCompare(b))
+                        .map((brand) => (
+                          <SelectItem key={brand} value={brand}>
+                            {brand}
+                          </SelectItem>
+                        ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Modèle */}
+                <div className="space-y-2">
+                  <Label htmlFor="model">Modèle</Label>
+
+                  <Input
+                    id="model"
+                    className="h-12"
+                    placeholder="Ex : 208, Clio, Golf..."
+                    value={model}
+                    onChange={(e) => setModel(e.target.value)}
+                  />
+                </div>
+
+                {/* Année */}
+                <div className="space-y-2">
+                  <Label htmlFor="year">Année</Label>
+
+                  <Select value={year} onValueChange={setYear}>
+                    <SelectTrigger id="year" className="h-12">
+                      <SelectValue placeholder="Sélectionnez une année" />
+                    </SelectTrigger>
+
+                    <SelectContent>
+                      {Array.from(
+                        { length: 30 },
+                        (_, i) => new Date().getFullYear() - i,
+                      ).map((y) => (
+                        <SelectItem key={y} value={y.toString()}>
+                          {y}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Plaque */}
+                <div className="space-y-2">
+                  <Label htmlFor="plate">Plaque d'immatriculation</Label>
+
+                  <Input
+                    id="plate"
+                    className="h-12 uppercase tracking-widest"
+                    placeholder="Ex : AB-123-CD"
+                    value={plate}
+                    onChange={(e) =>
+                      setPlateInput(e.target.value.toUpperCase())
+                    }
+                    maxLength={20}
+                  />
+                </div>
+
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full h-12 text-base"
+                >
+                  {hasVehicle
+                    ? "Mettre à jour le véhicule"
+                    : "Valider le véhicule"}
+                </Button>
+              </form>
+            </CardContent>
+          </Card>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </section>
   );
 };
 
-export default ManualSearchForm;
+export default VehicleForm;

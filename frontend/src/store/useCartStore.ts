@@ -15,15 +15,24 @@ type CartItem = {
 
 type CartStore = {
   items: CartItem[];
+
+  // Plaque
+  selectedPlate: string | null;
+
+  // Véhicule
   selectedVehicle: Vehicle;
 
-  // PANIER
+  // Panier
   addItem: (item: CartItem) => void;
   removeItem: (id: number) => void;
   clearCart: () => void;
   total: () => number;
 
-  // VEHICULE
+  // Plaque
+  setPlate: (plate: string | null) => void;
+  clearPlate: () => void;
+
+  // Véhicule
   setVehicle: (vehicle: Vehicle) => void;
   clearVehicle: () => void;
 };
@@ -32,30 +41,64 @@ export const useCartStore = create<CartStore>()(
   persist(
     (set, get) => ({
       items: [],
+
+      // Valeurs initiales
+      selectedPlate: null,
       selectedVehicle: null,
 
-      // ➤ Ajout service (blocage doublon)
+      // Panier
       addItem: (item) =>
         set((state) => {
-          const exists = state.items.some((i) => i.id === item.id);
+          const exists = state.items.some(
+            (i) => i.id === item.id
+          );
+
           if (exists) return state;
-          return { items: [...state.items, item] };
+
+          return {
+            items: [...state.items, item],
+          };
         }),
 
       removeItem: (id) =>
         set((state) => ({
-          items: state.items.filter((i) => i.id !== id),
+          items: state.items.filter(
+            (i) => i.id !== id
+          ),
         })),
 
       clearCart: () => set({ items: [] }),
 
-      total: () => get().items.reduce((acc, i) => acc + i.price, 0),
+      total: () =>
+        get().items.reduce(
+          (acc, i) => acc + i.price,
+          0
+        ),
 
-      // ➤ Stockage du véhicule
-      setVehicle: (vehicle) => set({ selectedVehicle: vehicle }),
+      // Plaque
+      setPlate: (plate) =>
+        set({
+          selectedPlate: plate,
+        }),
 
-      clearVehicle: () => set({ selectedVehicle: null }),
+      clearPlate: () =>
+        set({
+          selectedPlate: null,
+        }),
+
+      // Véhicule
+      setVehicle: (vehicle) =>
+        set({
+          selectedVehicle: vehicle,
+        }),
+
+      clearVehicle: () =>
+        set({
+          selectedVehicle: null,
+        }),
     }),
-    { name: "cart-storage" }
+    {
+      name: "cart-storage",
+    }
   )
 );
